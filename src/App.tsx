@@ -7,6 +7,10 @@ import './App.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
+function HelloWorld() {
+  return <h1>Hello, World!</h1>;
+}
+
 function App() {
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -24,6 +28,7 @@ function App() {
 
   return (
     <div className="pdf-container">
+      <HelloWorld />
       <Document file="/sample.pdf" onLoadSuccess={onDocumentLoadSuccess}>
         <Page pageNumber={pageNumber} />
       </Document>
