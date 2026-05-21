@@ -15,14 +15,39 @@ function App() {
     setNumPages(numPages);
   }
 
+  const changePage = (offset: number) => {
+    setPageNumber((prevPageNumber) => prevPageNumber + offset);
+  };
+
+  const previousPage = () => changePage(-1);
+  const nextPage = () => changePage(1);
+
   return (
-    <div>
-      <Document file="sample.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+    <div className="pdf-container">
+      <Document file="/sample.pdf" onLoadSuccess={onDocumentLoadSuccess}>
         <Page pageNumber={pageNumber} />
       </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+      <div className="controls">
+        <p>
+          Page {pageNumber} of {numPages}
+        </p>
+        <div className="button-group">
+          <button
+            type="button"
+            disabled={pageNumber <= 1}
+            onClick={previousPage}
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            disabled={pageNumber >= (numPages || 1)}
+            onClick={nextPage}
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
